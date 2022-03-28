@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import styled from "styled-components";
+import Sidebar from "./components/sidebar.js";
+import Daily from "./pages/Daily.js";
+import Monthly from "./pages/Monthly.js";
 
-function App() {
+const Main = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height:100%; overflow:hidden;
+`;
+export default function App() {
+  console.log("Welcome to my MoodTracker!")
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Main>
+      <BrowserRouter>
+        <Sidebar></Sidebar>
+        <Routes>
+          <Route element={<Daily />} path="/" exact />
+          <Route element={<Monthly />} path="/monthly" />
+        </Routes>
+      </BrowserRouter>
+    </Main>
   );
 }
-
-export default App;

@@ -1,0 +1,14 @@
+.menuDefaultStyle {
+  text-decoration: none;
+  font-family: "YdestreetL";
+  color: black;
+  font-size: 12pt;
+}
+
+.menuSelectStyle {
+  text-decoration:  underline;
+  text-underline-position: under;
+  font-family: "YdestreetB";
+  color: black;
+  font-size: 13pt;
+}
