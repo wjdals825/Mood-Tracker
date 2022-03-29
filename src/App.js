@@ -9,7 +9,7 @@ import Modal from "react-modal";
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-
+import './App.css';
 const Main = styled.div`
   display: flex;
   justify-content: space-between;
@@ -125,7 +125,7 @@ export default function App() {
   const [userInfo, setNowUser] = useState(checkUser? checkUser : '')
   const [modalIsOpen, setModalIsOpen] = useState(checkUser ? false : true);
   const [infoSetting, setUserInfo] = useState({ nickName: "", id: "" });
-  const MySwal = withReactContent(Swal)
+  const MySwal = withReactContent(Swal);
 
 
   const userInfoChange = (e) => {
@@ -141,16 +141,18 @@ export default function App() {
       setModalIsOpen(false);
       setNowUser(JSON.stringify(infoSetting));
       MySwal.fire({
-        icon: 'success',
-        text: 'Welcome to Mood-Tracker!',
-        timer: 1500
+        text: ' 🥳 Welcome to Mood-Tracker!',
+        timer: 2000,
+        position: 'top-end',
+        showConfirmButton: false,
+   
       })
     } else {
       MySwal.fire({
         icon: 'error',
         text: '닉네임과 아이디를 입력해주세요!',
         confirmButtonText: '확인',
-
+        confirmButtonColor:'#3b3b3b',
       })
       
     }
@@ -204,8 +206,4 @@ export default function App() {
   );
 }
 
-// function InfoSave(props){
-//   return (
 
-//   );
-// }

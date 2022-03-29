@@ -5,6 +5,9 @@ import SidebarItem from "./sidebarItem.js";
 import defaultImage from "../assets/check-pattern.jpeg";
 import './style.css';
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 const Container = styled.div`
   display: flex;
   border-right: 1px solid #b5b4b4;
@@ -65,7 +68,34 @@ export default function Sidebar(props)  {
     { name: "🗓 Monthly ", path: "/monthly" },
   ];
 
-let userInfo = props.userInfo.length > 0 ? JSON.parse(props.userInfo) : ''
+  let userInfo = props.userInfo.length > 0 ? JSON.parse(props.userInfo) : ''
+  const MySwal = withReactContent(Swal);
+  const logout = () =>{
+    MySwal.fire({
+      text : `로그아웃시, 현재까지의 기록이 날라가게 됩니다. \n 로그아웃 하시겠습니까?`,
+      showCancelButton:true,
+      cancelButtonText:'취소',
+      cancelButtonColor:'#cccbcb',
+      confirmButtonText: '확인',
+        confirmButtonColor:'#3b3b3b',
+    }).then((result)=>{
+      if(result.isConfirmed){
+        MySwal.fire({
+          text: ' 🥺 로그아웃 되었습니다.',
+          timer: 1000,
+          position: 'top-end',
+          showConfirmButton: false,
+     
+        }).then(()=>{
+          localStorage.clear();
+          window.location.reload();
+        })
+      
+      }
+    })
+   
+  }
+  
   return (
     <Container>
       <div>
@@ -87,7 +117,7 @@ let userInfo = props.userInfo.length > 0 ? JSON.parse(props.userInfo) : ''
         </Menu>
       </div>
 
-      <Logout > {userInfo && '( LOGOUT )'}</Logout>
+      <Logout onClick={() => logout()}> {userInfo && '( LOGOUT )'}</Logout>
     </Container>
   );
 }

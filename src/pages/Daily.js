@@ -36,6 +36,12 @@ const Mood = styled.div`
   border-radius: 50%;
   background-color: white;
   cursor: pointer;
+  text-align: center;
+    line-height: 560px;
+  p{
+    font-family: 'YUniverse-B';
+    font-size: 16px;
+  }
 `;
 
 export default function Daily() {
@@ -58,7 +64,7 @@ export default function Daily() {
         </Year>
       </Day>
       <Circle>
-        <Mood onClick={trackingMood}></Mood>
+        <Mood onClick={trackingMood}> <p>클릭하여 오늘 하루를 색으로 채워보세요!</p></Mood>
       </Circle>
     </Container>
   );
