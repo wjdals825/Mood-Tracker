@@ -3,6 +3,16 @@
   font-family: "YdestreetL";
   color: black;
   font-size: 12pt;
+  -webkit-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+}
+
+.menuDefaultStyle :hover{
+  -webkit-transform: scale(1.05);
+     -moz-transform: scale(1.05);
+      -ms-transform: scale(1.05);
+       -o-transform: scale(1.05);
+          transform: scale(1.05);  
 }
 
 .menuSelectStyle {
@@ -12,3 +22,6 @@
   color: black;
   font-size: 13pt;
 }
+
+
+

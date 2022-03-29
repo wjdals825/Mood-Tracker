@@ -53,30 +53,33 @@ const Logout = styled.div`
   font-family: "YdestreetL";
   font-size: 10pt;
   margin-bottom: 10%;
+  cursor: pointer;
+  color:gray;
+  text-decoration: underline 1px gray;
 `;
 
 /////
-export default function Sidebar() {
+export default function Sidebar(props)  {
   const menus = [
     { name: "👋 Daily ", path: "/" },
     { name: "🗓 Monthly ", path: "/monthly" },
   ];
 
-
+let userInfo = props.userInfo.length > 0 ? JSON.parse(props.userInfo) : ''
   return (
     <Container>
       <div>
         <Profile>
           <PImage src={defaultImage}></PImage>
           <Info>
-            <Name>Ryu JungMin</Name>
-            <Id>@ryu_ujm</Id>
+            <Name>{userInfo ? userInfo.nickName : 'unknown'}</Name>
+            <Id>@ {userInfo ? userInfo.id : '사용자 정보가 없습니다.'}</Id>
           </Info>
         </Profile>
         <Menu>
           {menus.map((menu, index) => {
             return (
-              <NavLink   className={({ isActive }) => (isActive ? 'menuSelectStyle' : 'menuDefaultStyle')} to={menu.path} key={index}>
+              <NavLink className={({ isActive }) => (isActive ? 'menuSelectStyle' : 'menuDefaultStyle')} to={menu.path} key={index}>
                 <SidebarItem menu={menu} />
               </NavLink>
             );
@@ -84,7 +87,7 @@ export default function Sidebar() {
         </Menu>
       </div>
 
-      <Logout>LOGOUT )</Logout>
+      <Logout > {userInfo && '( LOGOUT )'}</Logout>
     </Container>
   );
 }

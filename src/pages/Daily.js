@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import moment from 'moment';
+import 'moment/locale/ko';
 
 const Container = styled.div`
   background-color: #f0f0f0;
   height: 100vh - 1%;
   width: 67%;
-padding:  1% 5% 0% 5%;
-
+  padding: 1% 5% 0% 5%;
 `;
 
-const Date = styled.div`
+const Day = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,40 +19,51 @@ const Date = styled.div`
 const Year = styled.div`
   font-family: "YdestreetL";
   font-size: 80px;
+  cursor: default;
 `;
-
 
 const Circle = styled.div`
-display: flex;
-justify-content: center;
-height: 100%;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  cursor: default;
 `;
 
-
 const Mood = styled.div`
-    width: 580px;
-    height: 560px;
-border: 1px dotted black;
-border-radius: 50%;
-background-color: white;
-`
+  width: 580px;
+  height: 560px;
+  border: 1px dashed black;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+`;
+
 export default function Daily() {
+  let today = moment();
+
+  let year = today.format('yyyy')
+
   return (
     <Container>
-      <Date>
+      <Day>
         <Year>
-          20
+          {year.slice(0, 2)}
           <br />
-          22
+          {year.slice(2,4)}
         </Year>
-        <Year>03.</Year>
-      </Date>
-        <Circle>
-            <Mood></Mood>
-        </Circle>
+        <Year>
+         {today.format('MM')}.
+          <br />
+          {today.format('DD')}
+        </Year>
+      </Day>
+      <Circle>
+        <Mood onClick={trackingMood}></Mood>
+      </Circle>
     </Container>
-    //  <div className="container">
-    //      2022
-    //      </div>
   );
+}
+
+function trackingMood() {
+  return console.log("hihihi")
 }
