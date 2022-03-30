@@ -15,5 +15,6 @@ https://moodtracker-9a203.web.app/ <br/><br/> -->
 - sweetalert2 : https://www.npmjs.com/package/sweetalert2
 - styled-components : https://www.npmjs.com/package/styled-components
 - react-router-dom :https://www.npmjs.com/package/react-router-dom
-
+- moment : https://www.npmjs.com/package/moment
+- react-tooltip : https://www.npmjs.com/package/react-tooltip
 
