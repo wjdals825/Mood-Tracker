@@ -30,7 +30,7 @@ const ModalStyle = {
   },
   content: {
     paddingLeft: "5%",
-    background: "#3b3b3b",
+    background: "#494948",
     overflow: "auto",
     top: "20vh",
     left: "20vw",

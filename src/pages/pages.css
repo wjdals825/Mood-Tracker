@@ -1,0 +1,8 @@
+/* .__react_component_tooltip.show {
+    opacity: 1 !important;
+  } */
+
+  .__react_component_tooltip{
+    display: flex;
+    opacity: 1 !important;
+  }
