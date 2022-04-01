@@ -36,7 +36,7 @@ const Mood = styled.div`
   height: 560px;
   border: 1px dashed black;
   border-radius: 50%;
-  background-color: ${(props) => props.color ? props.color : 'white'};
+  background-color: ${(props) => (props.color ? props.color : "white")};
   cursor: pointer;
   text-align: center;
   line-height: 540px;
@@ -67,17 +67,35 @@ const InnerMood = styled.div`
   cursor: pointer;
 `;
 
+const MoodFace = styled.h2`
+  font-size: 16px;
+`;
+
 export default function Daily() {
   let today = moment();
 
   let year = today.format("yyyy");
 
-  const [checkColor, setColor] = useState("");
+  const [checkColor, setColor] = useState({ color: "", face: "" });
 
   const trackingMood = (e) => {
     setColor(e);
+    let checkAlready = localStorage.getItem(today.format("yyyy-MM"));
+    if (checkAlready) {
+      console.log("check",JSON.parse(checkAlready))
+      let saveInfo = {...JSON.parse(checkAlready), date: today.format("DD"), color: e.color };
+      console.log('s',saveInfo)
+      // localStorage.setItem(today.format("yyyy-MM"), JSON.stringify(saveInfo));
+    } else {
+      let saveInfo = { date: today.format("DD"), color: e.color };
+      localStorage.setItem(today.format("yyyy-MM"), JSON.stringify(saveInfo));
+    }
   };
-  
+
+  // const saveMood = (info) => {
+  //   console.log("info",info)
+  //   // 
+  // };
   return (
     <Container>
       <Day>
@@ -94,8 +112,17 @@ export default function Daily() {
         </Year>
       </Day>
       <Circle>
-        <Mood data-for="moodCheck" data-tip data-event="click focus" color={checkColor}>
-          {checkColor || <p>클릭하여 오늘 하루를 색으로 채워보세요!</p>}
+        <Mood
+          data-for="moodCheck"
+          data-tip
+          data-event="click focus"
+          color={checkColor.color}
+        >
+          {checkColor.face ? (
+            <MoodFace>{checkColor.face}</MoodFace>
+          ) : (
+            <p>클릭하여 오늘 하루를 색으로 채워보세요!</p>
+          )}
         </Mood>
         <ReactTooltip
           id="moodCheck"
@@ -106,23 +133,35 @@ export default function Daily() {
           isCapture={true}
         >
           {/* 행복해요 */}
-          <SelectMood onClick={() => trackingMood("#f4d284")}>
+          <SelectMood
+            onClick={() => trackingMood({ color: "#f4d284", face: "٩( ˃̶͈̀ᗨ˂̶͈́۶)" })}
+          >
             <InnerMood color="#f4d284">٩( ˃̶͈̀ᗨ˂̶͈́۶)</InnerMood>
           </SelectMood>
           {/* 열정이 불타올라~ */}
-          <SelectMood onClick={() => trackingMood("#eeafaf")}>
+          <SelectMood
+            onClick={() =>
+              trackingMood({ color: "#eeafaf", face: "(ง •̀ω•́)ง✧" })
+            }
+          >
             <InnerMood color="#eeafaf">(ง •̀ω•́)ง✧</InnerMood>
           </SelectMood>
           {/* 그냥 그래요 */}
-          <SelectMood onClick={() => trackingMood("#bae7af")}>
+          <SelectMood
+            onClick={() => trackingMood({ color: "#bae7af", face: "( •̅_•̅ )" })}
+          >
             <InnerMood color="#bae7af">( •̅_•̅ )</InnerMood>
           </SelectMood>
           {/* 화났어요 */}
-          <SelectMood onClick={() => trackingMood("#ff7f7f")}>
+          <SelectMood
+            onClick={() => trackingMood({ color: "#ff7f7f", face: "( ｰ̀εｰ́ )" })}
+          >
             <InnerMood color="#ff7f7f">( ｰ̀εｰ́ )</InnerMood>
           </SelectMood>
           {/* 우울해요 */}
-          <SelectMood onClick={() => trackingMood("#afc4e7")}>
+          <SelectMood
+            onClick={() => trackingMood({ color: "#afc4e7", face: "(ಥ﹏ಥ)" })}
+          >
             <InnerMood color="#afc4e7">(ಥ﹏ಥ)</InnerMood>
           </SelectMood>
         </ReactTooltip>
